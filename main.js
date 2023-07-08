@@ -1,6 +1,14 @@
 import marketValueScraper from "./webScrape.js";
 import fetchCountryData from "./fetchCountryData.js";
 
+const countryNameMappings = {
+  "Ireland": "Republic of Ireland",
+  "Czechia": "Czech Republic",
+  "Bosnia and Herzegovina": "Bosnia-Herzegovina",
+  "DR Congo": "Democratic Republic of the Congo",
+  "Gambia": "The Gambia",
+};
+
 const marketValues = await marketValueScraper(
   "https://www.transfermarkt.us/vereins-statistik/wertvollstenationalmannschaften/marktwertetop",
   4, // Assuming there are 4 pages to scrape
@@ -20,14 +28,19 @@ async function processAllData() {
   for (let entry of countryData) {
     //countryData is an array of objects, each object contains 3 key-value pairs
     // "flags":obj, "name":obj, and population:number.
-    if (marketValues.has(entry.name.common)) {
-      const marketValue = marketValues.get(entry.name.common); //marketValue is a string eg '€1.21bn' or '€889.50m'
+
+    const countryName = entry.name.common;
+    const mappedCountryName = countryNameMappings[countryName] || countryName;
+
+    if (marketValues.has(mappedCountryName)) {
+      const marketValue = marketValues.get(mappedCountryName); //marketValue is a string eg '€1.21bn' or '€889.50m'
       const numericMarketValue = convertMarketValue(marketValue);
       const flag = entry.flags.svg;
-      const population = (entry.population / 1000000).toFixed(3) + " M";
-      const marketValuePerCapita = numericMarketValue / entry.population;
+      const population = (entry.population / 1000000).toFixed(3) + "m";
+      const marketValuePerCapita = "€" +
+        (numericMarketValue / entry.population).toFixed(2);
 
-      marketValues.set(entry.name.common, [
+      marketValues.set(mappedCountryName, [
         marketValue,
         flag,
         population,
@@ -48,6 +61,21 @@ function convertMarketValue(marketValue) {
 
   return numericValue * 1000000;
 }
+
+/*
+MISSING COUNTRIES:
+England => N/A in API only United Kingdom,
+Scotland => N/A in API part of the UK,
+Wales => N/A in API part of the UK,
+Northern Ireland => N/A in API part of the UK,
+
+DISCREPANCIES:
+Republic of Ireland => Ireland.
+Czech Republic => Czechia.
+Bosnia-Herzegovina => Bosnia and Herzegovina.
+Democratic Republic of the Congo => DR Congo.
+The Gambia => Gambia.
+*/
 
 const finalMarketValues = await processAllData();
 console.log(finalMarketValues);
