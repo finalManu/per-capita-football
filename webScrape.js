@@ -6,6 +6,7 @@ async function marketValueScraper(url, totalPages) {
   //console.log(`navigating to ${url}`);
 
   const tableData = [];
+  const countryValues = new Map();
 
   for (let pageIdx = 1; pageIdx <= totalPages; pageIdx++) {
     //console.log(`Scraping data from page ${pageIdx}`);
@@ -26,11 +27,6 @@ async function marketValueScraper(url, totalPages) {
     tableData.push(...pageTableData);
   }
 
-  // Assuming tableData contains the scraped table data
-  // Assuming tableData contains the scraped table data
-
-  //console.log(tableData);
-
   await browser.close();
 
   for (const row of tableData) {
@@ -39,14 +35,19 @@ async function marketValueScraper(url, totalPages) {
       const country = row[1].trim();
       const marketValue = row[5].trim();
 
-      console.log(
-        `Ranking: ${ranking}, Country: ${country}, Market Value: ${marketValue}`,
-      );
+      countryValues.set(country, marketValue);
+
+      // console.log(
+      //   `Ranking: ${ranking}, Country: ${country}, Market Value: ${marketValue}`,
+      // );
     }
   }
+  return countryValues;
 }
 
-marketValueScraper(
-  "https://www.transfermarkt.us/vereins-statistik/wertvollstenationalmannschaften/marktwertetop",
-  4, // Assuming there are 5 pages to scrape
-);
+export default marketValueScraper;
+
+// marketValueScraper(
+//   "https://www.transfermarkt.us/vereins-statistik/wertvollstenationalmannschaften/marktwertetop",
+//   4, // Assuming there are 4 pages to scrape
+// );
