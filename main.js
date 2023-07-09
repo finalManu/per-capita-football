@@ -49,6 +49,35 @@ async function processAllData() {
     }
   }
 
+  const marketValueEngland = marketValues.get("England");
+  marketValues.set("England", [
+    marketValueEngland,
+    "https://flagcdn.com/gb-eng.svg",
+    "56.29m",
+    "€" + (convertMarketValue(marketValueEngland) / 56290000).toFixed(2),
+  ]);
+  const marketValueScotland = marketValues.get("Scotland");
+  marketValues.set("Scotland", [
+    marketValueScotland,
+    "https://flagcdn.com/gb-sct.svg",
+    "5.46m",
+    "€" + (convertMarketValue(marketValueScotland) / 5460000).toFixed(2),
+  ]);
+  const marketValueWales = marketValues.get("Wales");
+  marketValues.set("Wales", [
+    marketValueWales,
+    "https://flagcdn.com/gb-wls.svg",
+    "3.14m",
+    "€" + (convertMarketValue(marketValueWales) / 3140000).toFixed(2),
+  ]);
+  const marketValueNorthernIreland = marketValues.get("Northern Ireland");
+  marketValues.set("Northern Ireland", [
+    marketValueNorthernIreland,
+    "https://flagcdn.com/gb-nir.svg",
+    "1.89m",
+    "€" + (convertMarketValue(marketValueNorthernIreland) / 1890000).toFixed(2),
+  ]);
+
   return marketValues;
 }
 
