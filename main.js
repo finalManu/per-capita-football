@@ -114,7 +114,6 @@ const finalMarketValues = await processAllData();
 const jsonText = JSON.stringify(
   Object.fromEntries(finalMarketValues.entries()),
 );
-//  and new Map(Object.entries(JSON.parse(jsonText)))
 console.log(jsonText);
 
 //table body ref
