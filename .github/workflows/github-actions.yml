@@ -10,5 +10,6 @@ jobs:
            - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
            - name: List files in the repository 
              run: |
+              npm install
               node ${{ github.workspace }}/main.js
            - run: echo "This job's status is ${{ job.status }}."
