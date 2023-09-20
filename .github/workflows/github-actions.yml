@@ -11,7 +11,7 @@ jobs:
            - name: Scrape and output JSON
              run: |
               npm install
-              node ${{ github.workspace }}/main.js
+              node ${{ github.workspace }}/main.js > ${{ github.workspace }}/output.json
            - run: echo "This job's status is ${{ job.status }}."
            - run: |
                 git config --global user.email "manuelrydholm@gmail.com"
