@@ -107,4 +107,48 @@ The Gambia => Gambia.
 */
 
 const finalMarketValues = await processAllData();
-console.log(finalMarketValues);
+// jsonText = JSON.stringify(Array.from(map.entries()));
+// console.log(jsonText);
+// console.log(JSON.stringify(finalMarketValues));
+
+const jsonText = JSON.stringify(
+  Object.fromEntries(finalMarketValues.entries()),
+);
+//  and new Map(Object.entries(JSON.parse(jsonText)))
+console.log(jsonText);
+
+//table body ref
+// var tableBody = document.getElementById("table-body");
+
+// // loop and create table rows
+// for (var country in finalMarketValues) {
+//   if (finalMarketValues.hasOwnProperty(country)) {
+//     var rowData = finalMarketValues[country];
+//     var row = document.createElement("tr");
+
+//     var countryCell = document.createElement("td");
+//     countryCell.textContent = country;
+//     row.appendChild(countryCell);
+
+//     var marketValueCell = document.createElement("td");
+//     marketValueCell.textContent = rowData[0];
+//     row.appendChild(marketValueCell);
+
+//     var flagCell = document.createElement("td");
+//     var flagImage = document.createElement("img");
+//     flagImage.src = rowData[1];
+//     flagCell.appendChild(flagImage);
+//     row.appendChild(flagCell);
+
+//     var populationCell = document.createElement("td");
+//     populationCell.textContent = rowData[2];
+//     row.appendChild(populationCell);
+
+//     var perCapitaValueCell = document.createElement("td");
+//     perCapitaValueCell.textContent = rowData[3];
+//     row.appendChild(perCapitaValueCell);
+
+//     // Add the row to the table body
+//     tableBody.appendChild(row);
+//   }
+// }
