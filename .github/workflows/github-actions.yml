@@ -14,6 +14,8 @@ jobs:
               node ${{ github.workspace }}/main.js
            - run: echo "This job's status is ${{ job.status }}."
            - run: |
+                git config --global user.email "manuelrydholm@gmail.com"
+                git config --global user.name "finalManu"
                 git add .
                 git commit -m "Update JSON `date`"
                 git push
