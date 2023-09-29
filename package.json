@@ -2,5 +2,8 @@
     "type": "module",
     "dependencies": {
         "puppeteer": "^20.5.0"
+    },
+    "devDependencies": {
+        "tailwindcss": "^3.3.3"
     }
 }

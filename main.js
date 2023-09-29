@@ -110,6 +110,7 @@ const finalMarketValues = await processAllData();
 // jsonText = JSON.stringify(Array.from(map.entries()));
 // console.log(jsonText);
 // console.log(JSON.stringify(finalMarketValues));
+// console.log(finalMarketValues);
 
 const jsonText = JSON.stringify(
   Object.fromEntries(finalMarketValues.entries()),
