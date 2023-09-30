@@ -1,5 +1,5 @@
 let sortOrder = [];
-let currentSortOrder = "desc";
+let currentSortOrder = "asc";
 
 fetch("./output.json").then((response) => response.json()).then(
   (json) => {
