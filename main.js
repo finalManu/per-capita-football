@@ -2,16 +2,16 @@ import marketValueScraper from "./webScrape.js";
 import fetchCountryData from "./fetchCountryData.js";
 
 const countryNameMappings = {
-  "Ireland": "Republic of Ireland",
-  "Czechia": "Czech Republic",
+  Ireland: "Republic of Ireland",
+  Czechia: "Czech Republic",
   "Bosnia and Herzegovina": "Bosnia-Herzegovina",
   "DR Congo": "Democratic Republic of the Congo",
-  "Gambia": "The Gambia",
+  Gambia: "The Gambia",
 };
 
 const marketValues = await marketValueScraper(
   "https://www.transfermarkt.us/vereins-statistik/wertvollstenationalmannschaften/marktwertetop",
-  4, // Assuming there are 4 pages to scrape
+  4 // Assuming there are 4 pages to scrape
   //marketValues is a Map object with countries as keys and array as value {country: [marketValue]}
 );
 
@@ -37,8 +37,8 @@ async function processAllData() {
       const numericMarketValue = convertMarketValue(marketValue);
       const flag = entry.flags.svg;
       const population = (entry.population / 1000000).toFixed(3) + "m";
-      const marketValuePerCapita = "€" +
-        (numericMarketValue / entry.population).toFixed(2);
+      const marketValuePerCapita =
+        "€" + (numericMarketValue / entry.population).toFixed(2);
 
       marketValues.set(mappedCountryName, [
         marketValue,
@@ -107,48 +107,8 @@ The Gambia => Gambia.
 */
 
 const finalMarketValues = await processAllData();
-// jsonText = JSON.stringify(Array.from(map.entries()));
-// console.log(jsonText);
-// console.log(JSON.stringify(finalMarketValues));
-// console.log(finalMarketValues);
 
 const jsonText = JSON.stringify(
-  Object.fromEntries(finalMarketValues.entries()),
+  Object.fromEntries(finalMarketValues.entries())
 );
 console.log(jsonText);
-
-//table body ref
-// var tableBody = document.getElementById("table-body");
-
-// // loop and create table rows
-// for (var country in finalMarketValues) {
-//   if (finalMarketValues.hasOwnProperty(country)) {
-//     var rowData = finalMarketValues[country];
-//     var row = document.createElement("tr");
-
-//     var countryCell = document.createElement("td");
-//     countryCell.textContent = country;
-//     row.appendChild(countryCell);
-
-//     var marketValueCell = document.createElement("td");
-//     marketValueCell.textContent = rowData[0];
-//     row.appendChild(marketValueCell);
-
-//     var flagCell = document.createElement("td");
-//     var flagImage = document.createElement("img");
-//     flagImage.src = rowData[1];
-//     flagCell.appendChild(flagImage);
-//     row.appendChild(flagCell);
-
-//     var populationCell = document.createElement("td");
-//     populationCell.textContent = rowData[2];
-//     row.appendChild(populationCell);
-
-//     var perCapitaValueCell = document.createElement("td");
-//     perCapitaValueCell.textContent = rowData[3];
-//     row.appendChild(perCapitaValueCell);
-
-//     // Add the row to the table body
-//     tableBody.appendChild(row);
-//   }
-// }

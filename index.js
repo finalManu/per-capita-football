@@ -2,9 +2,15 @@ let currentSortOrder = "desc";
 
 const json = await fetch("./output.json").then((response) => response.json()); // {"Country":[marketvalue,flag,population,percapita],...}
 const entries = Object.entries(json); // [["Country", [marketvalue,flag,population,percapita]], ...]
-const rowData = entries.map(([key, values]) => [key, ...values]).map((
-  [country, marketValue, flag, population, percapita],
-) => [flag, country, marketValue, population, percapita]); // [[flag, "Country", marketvalue,population,percapita], ...]
+const rowData = entries
+  .map(([key, values]) => [key, ...values])
+  .map(([country, marketValue, flag, population, percapita]) => [
+    flag,
+    country,
+    marketValue,
+    population,
+    percapita,
+  ]); // [[flag, "Country", marketvalue,population,percapita], ...]
 
 const possibleOrders = ["country", "marketvalue", "population", "percapita"];
 const orderToTable = new Map(); // All columns ordered in descending order
@@ -41,7 +47,7 @@ possibleOrders.forEach((order, i) => {
     sortIconHandler(thEls[i].querySelector("i"));
     if (currentSortOrder === "asc") {
       createAndAddRowsToTable(orderToTable.get(order));
-    } else { //currentSortOrder === "desc"
+    } else {
       createAndAddRowsToTable([...orderToTable.get(order)].reverse());
     }
   };
@@ -59,9 +65,7 @@ function createAndAddRowsToTable(orderArray) {
     var countryCell = document.createElement("td");
     countryCell.innerHTML = `
         <div class="flex items-center gap-x-2"> 
-          <img src="${
-      entry[0]
-    }" class="pl-2 w-8 h-4 object-cover object-center shadow-xl"></img>
+          <img src="${entry[0]}" class="pl-2 w-8 h-4 object-cover object-center shadow-xl"></img>
           <p>${entry[1]}</p>
         </div>
       `;
