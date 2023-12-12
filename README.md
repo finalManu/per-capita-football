@@ -25,7 +25,7 @@ Dividing this value by the population of the respective team's country gives you
 
 ## How does it work? 
 
-Node.js is used to run Puppeteer in headless mode to scrape the the market value of four pages worth (aprox ~100) of teams from transfermarkt.
+Puppeteer runs in headless mode to scrape the the market value of four pages worth (aprox ~100) of teams from transfermarkt.
 
 The [REST countries](https://restcountries.com/) API is then used to fetch flag images and population data of the resulting countries.
 
