@@ -60,8 +60,8 @@ function createAndAddRowsToTable(orderArray) {
   for (let entry of orderArray) {
     var row = document.createElement("tr");
     row.classList.add("border-b");
-    row.classList.add("hover:bg-sky-700");
-
+    row.classList.add("hover:bg-sky-100");
+    row.classList.add("dark:hover:bg-sky-700");
     var countryCell = document.createElement("td");
     countryCell.innerHTML = `
         <div class="flex items-center gap-x-2"> 
