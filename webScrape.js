@@ -1,7 +1,10 @@
 import puppeteer from "puppeteer";
 
 async function marketValueScraper(url, totalPages) {
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   //console.log(`navigating to ${url}`);
 
