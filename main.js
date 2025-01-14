@@ -7,7 +7,8 @@ const countryNameMappings = {
   "Bosnia and Herzegovina": "Bosnia-Herzegovina",
   "DR Congo": "Democratic Republic of the Congo",
   Gambia: "The Gambia",
-  Turkey: "Türkiye",
+  // Turkey: "Türkiye",
+  Turkey: "Turkiye",
 };
 
 const marketValues = await marketValueScraper(
